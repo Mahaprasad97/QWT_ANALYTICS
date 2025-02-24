@@ -1,0 +1,48 @@
+version: 2
+ 
+models:
+  - name: stg_customers
+    description: "{{doc('customers_desc')}}"
+    columns:
+      - name: CUSTOMERID
+        description: unique identifier for each customer
+        tests:
+          - unique
+          - not_null
+          - is_even
+ 
+ 
+  - name: stg_products
+    description: load data from raw dev to staging dev
+    columns:
+      - name: PRODUCTID
+        tests:
+          - unique
+          - not_null
+          - is_even
+      - name: PRODUCTNAME
+        tests:
+          - not_null
+          - unique
+ 
+ 
+  - name: stg_shipments
+    columns:
+      - name: STATUS
+        tests:
+          - accepted_values:
+              values: ['shipped','returned','ordered','replaced']
+ 
+ 
+  - name: stg_order_details
+    columns:
+      - name: ORDERID
+        tests:
+          - relationships:
+              to: ref('stg_orders')
+              field: ORDERID
+          - relationships:
+              to: ref('stg_shipments')
+              field: ORDERID
+           
+ 
