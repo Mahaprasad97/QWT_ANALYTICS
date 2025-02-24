@@ -1,0 +1,5 @@
+select ORDERID,
+COUNT(LINENO) AS TOTAL_LINE
+from {{ref('fact_orders')}} 
+GROUP BY ORDERID 
+HAVING TOTAL_LINE<1
