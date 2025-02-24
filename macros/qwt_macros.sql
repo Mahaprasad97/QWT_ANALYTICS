@@ -4,7 +4,7 @@
  
 select distinct
 lineno
-from {{ ref('fact_orders') }}
+from {{ ref('trf_orders') }}
 order by 1
  
 {% endset %}
@@ -34,7 +34,7 @@ order by 1
 {% set min_order_query  %}
  
 select min(orderdate)
-from {{ ref('fact_orders') }}
+from {{ ref('trf_orders') }}
  
 {% endset %}
  
@@ -61,7 +61,7 @@ from {{ ref('fact_orders') }}
 {% set max_order_query  %}
  
 select max(orderdate)
-from {{ ref('fact_orders') }}
+from {{ ref('trf_orders') }}
  
 {% endset %}
  
